@@ -1,6 +1,6 @@
 # The ![Juju](https://juju.ubuntu.com/wp-content/themes/juju-website/img/logo-ubuntu.png) Charm Championship
 
-Everyone needs infrastructure, leverage the power of juju to do it in an interesting way and win a prize.
+Everyone needs infrastructure, leverage the power of Juju to do it in an interesting way and win a prize.
 
 ---
 
@@ -9,7 +9,7 @@ Everyone needs infrastructure, leverage the power of juju to do it in an interes
 - Charm up the individual services in your infrastructure, make something that is cool and repeatable. 
 - Put it together into a Juju bundle.
 - Submit your stack for the prize.
-- Win money.
+- Win money, over $30,000 USD in prizes! 
 
 
 ## This contest is for software developers.
@@ -33,8 +33,6 @@ Everyone needs infrastructure, leverage the power of juju to do it in an interes
   - High Availability - represents a full stack of HA-enabled services to accomplish a task.
   - Data Mining - represents a full stack of data mining and “big data” analysis.
   - Monitoring - represents a full stack of monitoring solutions for existing services.
-
-- Winners will be presented at the OpenStack Developer Summit to an audience of over 2,000 in Hong Kong
 
 - Joint marketing opportunities with Canonical 
 
@@ -71,4 +69,4 @@ A: NO! The charms in the Charm Store are Free Software that we want people to im
 
 
 
-This contest inspired by our friends at [Netflix](https://github.com/Netflix/Cloud-Prize).
+This contest is inspired by our friends at [Netflix](https://github.com/Netflix/Cloud-Prize).
