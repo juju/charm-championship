@@ -9,7 +9,7 @@ Everyone needs infrastructure, leverage the power of Juju to do it in an interes
 - Charm up the individual services in your infrastructure, make something that is cool and repeatable. 
 - Put it together into a Juju bundle.
 - Submit your stack for the prize.
-- Win money.
+- Win money, over $30,000 USD in prizes! 
 
 
 ## This contest is for software developers.
