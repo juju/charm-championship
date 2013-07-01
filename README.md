@@ -26,7 +26,7 @@ Everyone needs infrastructure, leverage the power of juju to do it in an interes
 
 ## Prizes
 
-- $10,000 USB prize for each category:
+- $10,000 USD prize for each category:
   - In addition individual charm maintainers of a reviewed charm in the “reviewed” section of the Charm Store receive $200 if their charm is included in a winning template. This can be awarded multiple times, to a maximum total of $3,000 per category.</li>
 
 - Winners in three categories
