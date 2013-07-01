@@ -1,6 +1,6 @@
 # The ![Juju](https://juju.ubuntu.com/wp-content/themes/juju-website/img/logo-ubuntu.png) Charm Championship
 
-Everyone needs infrastructure, leverage the power of juju to do it in an interesting way and win a prize.
+Everyone needs infrastructure, leverage the power of Juju to do it in an interesting way and win a prize.
 
 ---
 
