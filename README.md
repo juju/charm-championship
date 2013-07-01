@@ -1,4 +1,4 @@
-# The ![Juju](https://juju.ubuntu.com/wp-content/themes/juju-website/img/logo-ubuntu.png) Charm Championship
+![Juju](http://ubuntuone.com/5mLQLCHY50wB2OyqejDpRa)
 
 Everyone needs infrastructure, leverage the power of Juju to do it in an interesting way and win a prize.
 
