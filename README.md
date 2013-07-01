@@ -71,4 +71,4 @@ A: NO! The charms in the Charm Store are Free Software that we want people to im
 
 
 
-This contest inspired by our friends at [Netflix](https://github.com/Netflix/Cloud-Prize).
+This contest is inspired by our friends at [Netflix](https://github.com/Netflix/Cloud-Prize).
