@@ -34,8 +34,6 @@ Everyone needs infrastructure, leverage the power of Juju to do it in an interes
   - Data Mining - represents a full stack of data mining and “big data” analysis.
   - Monitoring - represents a full stack of monitoring solutions for existing services.
 
-- Winners will be presented at the OpenStack Developer Summit to an audience of over 2,000 in Hong Kong
-
 - Joint marketing opportunities with Canonical 
 
 ## Rules
