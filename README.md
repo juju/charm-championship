@@ -20,7 +20,9 @@ Everyone needs infrastructure, leverage the power of Juju to do it in an interes
 
 ### Step 3 - Design and implement your infrastructure in the [Juju GUI](http://jujucharms.com/charms/precise/juju-gui), then export it.
 
-### Step 4 - Submit your deployment bundle by forking this project and submitting a pull request.
+### Step 4 - [Register](https://pages.canonical.com/CharmChamshionship_sign-up.html) so we can keep you updated and contact you if you're a finalist. 
+
+### Step 5 - Submit your deployment bundle by forking this project and submitting a pull request.
 
 ---
 
