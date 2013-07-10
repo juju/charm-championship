@@ -66,9 +66,7 @@ A: See [this page](https://juju.ubuntu.com/charm-championship) with the step by 
 
 ### Q: Aren’t you just doing this to get a bunch of free work?
 
-A: NO! The charms in the Charm Store are Free Software that we want people to improve to drive knowledge sharing between devops forward. Keep your secret sauce secret, we want to concentrate on improving the blocks people use to build their infrastructure. 
-
-
+A: NO! The charms in the Charm Store are Free Software. We want people to improve knowledge sharing between devops. Keep your secret sauce secret, we want to concentrate on improving the blocks people use to build their infrastructure. 
 
 
 This contest is inspired by our friends at [Netflix](https://github.com/Netflix/Cloud-Prize).
