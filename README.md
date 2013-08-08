@@ -33,7 +33,7 @@ Everyone needs infrastructure, leverage the power of Juju to do it in an interes
 
 - Winners in three categories
   - High Availability - represents a full stack of HA-enabled services to accomplish a task.
-  - Data Mining - represents a full stack of data mining and “big data” analysis.
+  - Data Science / Data Mining - represents a full stack of data mining and “big data” analysis.
   - Monitoring - represents a full stack of monitoring solutions for existing services.
 
 - Joint marketing opportunities with Canonical 
