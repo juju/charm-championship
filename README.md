@@ -9,7 +9,7 @@ Everyone needs infrastructure, leverage the power of Juju to do it in an interes
 - Charm up the individual services in your infrastructure, make something that is cool and repeatable. 
 - Put it together into a Juju bundle.
 - Submit your stack for the prize.
-- Win money, over $30,000 USD in prizes! 
+- Win money, over $60,000 USD in prizes! 
 
 
 ## This contest is for software developers.
@@ -29,12 +29,12 @@ Everyone needs infrastructure, leverage the power of Juju to do it in an interes
 ## Prizes
 
 - $10,000 USD prize for each category:
-  - In addition individual charm maintainers of a reviewed charm in the “reviewed” section of the Charm Store receive $200 if their charm is included in a winning template. This can be awarded multiple times, to a maximum total of $3,000 per category.</li>
+  - In addition, individual charm maintainers of a reviewed charm in the “reviewed” section of the Charm Store receive $200 if their charm is included in a winning template. This can be awarded multiple times, to a maximum total of $3,000 per category.</li>
 
-- Winners in three categories
-  - Continuous deployment - a bundle of charms that allows startups to be immediately productive, continually launch new features, and scale effortlessly
-  - Media - a bundle of charms that brings value to media content providers, distributors, and associated mass medium technologies
-  - Telco - a bundle of charms that brings value to telecommunications service providers and telecommunications infrastructure
+- Winners in six categories
+  - Continuous deployment - a bundle of charms that allows startups to be immediately productive, continually launch new features, and scale effortlessly.
+  - Media - a bundle of charms that brings value to media content providers, distributors, and associated mass medium technologies.
+  - Telco - a bundle of charms that brings value to telecommunications service providers and telecommunications infrastructure.
   - High Availability - represents a full stack of HA-enabled services to accomplish a task.
   - Data Science / Data Mining - represents a full stack of data mining and “big data” analysis.
   - Monitoring - represents a full stack of monitoring solutions for existing services.
@@ -65,7 +65,7 @@ A: There is a mailing list for it [here](https://lists.ubuntu.com/mailman/listin
 
 ### Q: How do I actually contribute?
 
-A: See [this page](https://juju.ubuntu.com/charm-championship) with the step by step. But basically, model your stack in Juju, export it, and submit the yaml file via github.
+A: See [this page](https://juju.ubuntu.com/charm-championship) with the step by step. But basically, model your stack in the Juju GUI, export it, and submit the yaml file via github.
 
 ### Q: Aren’t you just doing this to get a bunch of free work?
 
