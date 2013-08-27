@@ -32,6 +32,9 @@ Everyone needs infrastructure, leverage the power of Juju to do it in an interes
   - In addition individual charm maintainers of a reviewed charm in the “reviewed” section of the Charm Store receive $200 if their charm is included in a winning template. This can be awarded multiple times, to a maximum total of $3,000 per category.</li>
 
 - Winners in three categories
+  - Continuous deployment - a bundle of charms that allows startups to be immediately productive, continually launch new features, and scale effortlessly
+  - Media - a bundle of charms that brings value to media content providers, distributors, and associated mass medium technologies
+  - Telco - a bundle of charms that brings value to telecommunications service providers and telecommunications infrastructure
   - High Availability - represents a full stack of HA-enabled services to accomplish a task.
   - Data Science / Data Mining - represents a full stack of data mining and “big data” analysis.
   - Monitoring - represents a full stack of monitoring solutions for existing services.
@@ -47,7 +50,7 @@ See [this page](https://juju.ubuntu.com/charm-championship) for a complete list 
 
 ## Timeline
 
-- July 1 - October 1
+- July 1 - October 22
 
 ## FAQ
 
