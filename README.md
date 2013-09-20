@@ -63,7 +63,7 @@ Anyone who has an infrastucture stack in the cloud and is interested in managing
 A: There is a mailing list for it [here](https://lists.ubuntu.com/mailman/listinfo/juju).
 
 
-### Q: How do I actually contribute?
+### Q: How do I actually submit my entry?
 
 A: See [this page](https://juju.ubuntu.com/charm-championship) with the step by step. But basically, model your stack in the Juju GUI, export it, and submit the yaml file via github.
 
