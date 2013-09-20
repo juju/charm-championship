@@ -67,6 +67,15 @@ A: There is a mailing list for it [here](https://lists.ubuntu.com/mailman/listin
 
 A: See [this page](https://juju.ubuntu.com/charm-championship) with the step by step. But basically, model your stack in the Juju GUI, export it, and submit the yaml file via github.
 
+Export your bundle from the Juju GUI by hitting “Shift-D”. This will download a YAML file, which is your _submission_ to the contest. To import/re-deploy your bundle use the Juju Deployer if you want to test it on other environments:
+
+    sudo pip install juju-deployer
+    juju bootstrap
+    juju-deployer -c your-gui-export.yaml
+
+We recommend testing your bundle before submission, judges can't judge non-working bundles! 
+
+
 ### Q: Aren’t you just doing this to get a bunch of free work?
 
 A: NO! The charms in the Charm Store are Free Software. We want people to improve knowledge sharing between devops. Keep your secret sauce secret, we want to concentrate on improving the blocks people use to build their infrastructure. 
