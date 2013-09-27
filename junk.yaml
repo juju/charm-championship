@@ -1,0 +1,100 @@
+envExport: 
+  series: precise
+  services: 
+    postgresql: 
+      charm: "cs:precise/postgresql-42"
+      num_units: 1
+      options: 
+        advisory_lock_restart_key: 765
+        archive_command: ""
+        archive_mode: false
+        autovacuum: true
+        autovacuum_analyze_scale_factor: 0.1
+        autovacuum_analyze_threshold: 50
+        autovacuum_vacuum_cost_delay: 20ms
+        autovacuum_vacuum_scale_factor: 0.2
+        backup_dir: /var/lib/postgresql/backups
+        backup_retention_count: 7
+        backup_schedule: "13 4 * * *"
+        checkpoint_segments: 3
+        cluster_name: main
+        config_change_command: reload
+        dumpfile_location: None
+        effective_cache_size: ""
+        encoding: "UTF-8"
+        "extra-packages": ""
+        extra_archives: ""
+        hot_standby: false
+        hot_standby_feedback: false
+        kernel_shmall: "0"
+        kernel_shmmax: "0"
+        listen_ip: "*"
+        listen_port: 5432
+        locale: C
+        log_autovacuum_min_duration: -1
+        log_checkpoints: false
+        log_connections: false
+        log_disconnections: false
+        log_line_prefix: "%t "
+        log_lock_waits: false
+        log_min_duration_statement: -1
+        log_timezone: UTC
+        maintenance_work_mem: 1MB
+        max_connections: 100
+        max_wal_senders: "0"
+        nagios_context: juju
+        performance_tuning: auto
+        random_page_cost: 4
+        replicated_wal_keep_segments: 5000
+        search_path: "\"$user\",public"
+        shared_buffers: ""
+        ssl: "True"
+        standard_conforming_strings: true
+        temp_buffers: 1MB
+        version: "9.1"
+        "volume-dev-regexp": "/dev/vd[b-z]"
+        "volume-ephemeral-storage": true
+        "volume-map": ""
+        wal_buffers: "-1"
+        wal_keep_segments: "0"
+        wal_level: minimal
+        work_mem: 1MB
+      constraints: "cpu=,mem=,arch="
+      annotations: 
+        "gui-x": 282
+        "gui-y": 513
+    rails: 
+      charm: "cs:precise/rails-1"
+      num_units: 1
+      options: 
+        deploy_key: ""
+        env: ""
+        extra_packages: ""
+        rack_env: production
+        repo: ""
+        revision: HEAD
+        scm_provider: git
+        svn_password: ""
+        svn_username: ""
+      constraints: "cpu=,mem=,arch="
+      annotations: 
+        "gui-x": 294
+        "gui-y": 115
+    nagios: 
+      charm: "cs:precise/nagios-4"
+      num_units: 1
+      options: 
+        extraconfig: ""
+      constraints: "cpu=,mem=,arch="
+      annotations: 
+        "gui-x": 548
+        "gui-y": 355
+  relations: 
+    - - "rails:postgresql"
+      - "postgresql:db"
+    - - "nagios:nagios"
+      - "postgresql:juju-info"
+    - - "nagios:nagios"
+      - "postgresql:juju-info"
+    - - "nagios:nagios"
+      - "postgresql:juju-info"
