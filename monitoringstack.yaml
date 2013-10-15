@@ -1,0 +1,139 @@
+envExport: 
+  services: 
+    elasticsearch: 
+      charm: "cs:~paulcz/precise/elasticsearch-4"
+      num_units: 1
+      options: 
+        "bootstrap-class": org.elasticsearch.bootstrap.ElasticSearchF
+        checksum: 1f3b8ea5468554d47a3862aba2c36176
+        checksumwrapper: 450fcee5225cc4837e8b61eb64bcc2d2
+        "cluster-name": elasticsearch
+        downloadurl: "https://download.elasticsearch.org/elasticsearch/elasticsearch"
+        ec2: false
+        "ec2-access-key": null
+        "ec2-region": "us-east-1"
+        "ec2-secret-key": null
+        version: 0.90.5
+        zenmasters: "false"
+    "juju-gui": 
+      charm: "cs:precise/juju-gui-76"
+      num_units: 1
+      options: 
+        "builtin-server": false
+        "builtin-server-logging": info
+        "charmworld-url": "https://manage.jujucharms.com/"
+        "command-log-file": "/var/log/juju/juju-gui.log"
+        "default-viewmode": sidebar
+        "juju-api-branch": "lp:~hazmat/juju/rapi-rollup"
+        "juju-gui-console-enabled": false
+        "juju-gui-source": stable
+        "login-help": "The password is the admin-secret from the Juju environment.  This can\noften be found by looking in ~/.juju/environments.yaml.\n"
+        nagios_context: juju
+        "read-only": false
+        "repository-location": "ppa:juju-gui-charmers/stable"
+        sandbox: false
+        secure: true
+        "serve-tests": false
+        "show-get-juju-button": false
+        "ssl-cert-contents": null
+        "ssl-cert-path": "/etc/ssl/juju-gui"
+        "ssl-key-contents": null
+        staging: false
+        "staging-environment": sample
+        "use-analytics": true
+    rabbit: 
+      charm: "cs:precise/rabbitmq-server-14"
+      num_units: 1
+      options: 
+        "ha-bindiface": eth0
+        "ha-mcastport": 5406
+        management_plugin: false
+        nagios_context: juju
+        "rbd-name": rabbitmq1
+        "rbd-size": 5G
+        ssl_cert: null
+        ssl_enabled: false
+        ssl_key: null
+        ssl_port: 5671
+        vip: null
+        vip_cidr: 24
+        vip_iface: eth0
+    "sensu-server": 
+      charm: "cs:~paulcz/precise/sensu-server-0"
+      num_units: 1
+      options: 
+        dashboard_password: secret
+        rabbit_host: null
+        rabbit_password: null
+        rabbit_username: sensu
+        rabbit_vhost: sensu
+    graphite: 
+      charm: "cs:~paulcz/precise/graphite-1"
+      num_units: 1
+      options: 
+        rabbit_exchange: metrics
+        rabbit_username: sensu
+        rabbit_vhost: sensu
+    "logstash-indexer": 
+      charm: "cs:~paulcz/precise/logstash-indexer-7"
+      num_units: 1
+    kibana: 
+      charm: "cs:~paulcz/precise/kibana-5"
+      num_units: 1
+    "sensu-agent": 
+      charm: "cs:~paulcz/precise/sensu-agent-0"
+      num_units: 6
+      options: 
+        rabbit_host: null
+        rabbit_password: null
+        rabbit_username: sensu
+        rabbit_vhost: sensu
+    "logstash-agent": 
+      charm: "cs:~paulcz/precise/logstash-agent-3"
+      num_units: 5
+      options: 
+        CustomLogFile: ""
+        CustomLogType: ""
+        InputTwitterEnabled: false
+        InputTwitterKeywords: ""
+        InputTwitterPassword: ""
+        InputTwitterUsername: ""
+        Reload: "0"
+  relations: 
+    - - "sensu-server:amqp"
+      - "rabbit:amqp"
+    - - "graphite:amqp"
+      - "rabbit:amqp"
+    - - "logstash-indexer:amqp"
+      - "rabbit:amqp"
+    - - "elasticsearch:cluster"
+      - "logstash-indexer:cluster"
+    - - "elasticsearch:rest"
+      - "kibana:rest"
+    - - "logstash-agent:juju-info"
+      - "rabbit:juju-info"
+    - - "logstash-agent:juju-info"
+      - "sensu-server:juju-info"
+    - - "logstash-agent:juju-info"
+      - "graphite:juju-info"
+    - - "logstash-agent:juju-info"
+      - "kibana:juju-info"
+    - - "logstash-agent:amqp"
+      - "rabbit:amqp"
+    - - "logstash-agent:juju-info"
+      - "elasticsearch:juju-info"
+    - - "sensu-agent:juju-info"
+      - "rabbit:juju-info"
+    - - "sensu-agent:juju-info"
+      - "sensu-server:juju-info"
+    - - "sensu-agent:juju-info"
+      - "graphite:juju-info"
+    - - "sensu-agent:juju-info"
+      - "logstash-indexer:juju-info"
+    - - "sensu-agent:juju-info"
+      - "kibana:juju-info"
+    - - "sensu-agent:juju-info"
+      - "elasticsearch:juju-info"
+    - - "sensu-agent:amqp"
+      - "rabbit:amqp"
+  series: precise
