@@ -82,7 +82,6 @@ envExport:
       num_units: 1
     "sensu-agent": 
       charm: "cs:~paulcz/precise/sensu-agent-0"
-      num_units: 6
       options: 
         rabbit_host: null
         rabbit_password: null
@@ -90,7 +89,6 @@ envExport:
         rabbit_vhost: sensu
     "logstash-agent": 
       charm: "cs:~paulcz/precise/logstash-agent-3"
-      num_units: 5
       options: 
         CustomLogFile: ""
         CustomLogType: ""

@@ -24,6 +24,7 @@ juju add-relation elasticsearch:rest kibana
 # Deploy Agents
 ## Logstash
 juju add-relation logstash-agent:juju-info rabbit
+juju add-relation logstash-agent:juju-info juju-gui
 juju add-relation logstash-agent:juju-info sensu-server
 juju add-relation logstash-agent:juju-info graphite
 juju add-relation logstash-agent:juju-info kibana
@@ -31,7 +32,7 @@ juju add-relation logstash-agent:juju-info elasticsearch
 juju add-relation logstash-agent:amqp rabbit
 ## Sensu
 juju add-relation sensu-agent:juju-info rabbit
-juju add-relation sensu-agent:juju-info sensu-server
+juju add-relation sensu-agent:juju-info juju-gui
 juju add-relation sensu-agent:juju-info graphite
 juju add-relation sensu-agent:juju-info logstash-indexer
 juju add-relation sensu-agent:juju-info kibana
