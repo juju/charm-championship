@@ -1,11 +1,11 @@
 # Deploy Services
 juju deploy juju-gui
 juju deploy rabbitmq-server rabbit
-juju deploy cs:~paulcz/precise/sensu-server
-juju deploy cs:~paulcz/precise/graphite
-juju deploy cs:~paulcz/precise/logstash-indexer
 juju deploy cs:~paulcz/precise/kibana
 juju deploy cs:~paulcz/precise/elasticsearch
+juju deploy cs:~paulcz/precise/graphite
+juju deploy cs:~paulcz/precise/logstash-indexer
+juju deploy cs:~paulcz/precise/sensu-server
 
 # Deploy Subordinates
 juju deploy cs:~paulcz/precise/sensu-agent
@@ -15,11 +15,11 @@ juju deploy cs:~paulcz/precise/logstash-agent
 juju set graphite rabbit_username=sensu rabbit_vhost=sensu rabbit_exchange=metrics
 
 # Create Relationships
-juju add-relation sensu-server rabbit
-juju add-relation graphite:amqp rabbit
 juju add-relation logstash-indexer:amqp rabbit
 juju add-relation elasticsearch:cluster logstash-indexer
 juju add-relation elasticsearch:rest kibana
+juju add-relation sensu-server rabbit
+juju add-relation graphite:amqp rabbit
 
 # Deploy Agents
 ## Logstash

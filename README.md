@@ -6,7 +6,7 @@ It has been tested in Amazon EC2,  but should work in any environment.
 
 ## The following Applications will be Installed and configured
 
-![Alt text](juju-gui.png "Screenshot from JuJu Gui")
+![Screenshot from JuJu Gui](juju-gui.png "Screenshot from JuJu Gui")
 
 * Juju
 * -- bootstrap node
@@ -44,7 +44,7 @@ Use one of the two following methods to kick off the deployment.
 
 ### Juju Deployer
 
-The following *should* work,  however I've encountered several bugs in the juju tools.  Some appear to have been fixed,  but still getting consistently reliable results.    I recommend you use the other method.
+The following *should* work,  however I've encountered several bugs in the juju tools.  Some appear to have been fixed,  but still not getting consistently reliable results.    I recommend you use the other method.
 
 
 ```
@@ -58,6 +58,8 @@ juju expose kibana
 juju expose rabbit
 juju expose juju-gui
 ```
+
+#### Bugs that I found when trying to use this method
 
 * [juju-gui export and subordinate charms bug](https://bugs.launchpad.net/juju-core/+bug/1240708).
 * -- Has been resolved.
@@ -92,6 +94,8 @@ Below is the easiest way I could think of to represent how to find the hostnames
 
 ### Kibana   
 
+![Screenshot from Kibana](kibana.png "Screenshot from Kibana")
+
 #### Basic Dashboard
 http://`services => kibana => public-address`:80
 
@@ -100,12 +104,16 @@ http://`services => kibana => public-address`/index.html#/dashboard/file/web.jso
 
 ### Sensu
 
+![Screenshot from Sensu](sensu.png "Screenshot from Sensu")
+
 http://`services => sensu-server => public-address`:8080
 
 * username: admin
 * password: secret
 
 ### Graphite 
+
+![Screenshot from Graphite](graphite.png "Screenshot from Graphite")
 
 #### Base Graphite Web
 
