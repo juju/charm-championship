@@ -18,9 +18,9 @@ echo CPU User time Graph:
 echo - "http://`cat /tmp/juju.yml | shyaml get-value services.graphite.units.graphite/0.public-address`/graphlot/?from=-1hour&until=-0hour&target=stats.*.cpu.user"
 echo
 echo Sensu Dashboard:
-echo - http://`cat /tmp/juju.yml | shyaml get-value services.sensu-server.units.sensu-server/0.public-address`:8080
+echo - "http://`cat /tmp/juju.yml | shyaml get-value services.sensu-server.units.sensu-server/0.public-address`:8080/#clients"
 echo - Username: admin
-echo - Password: `juju get sensu-server | shyaml get-value settings.dashboard_password.value`/clients
+echo - Password: `juju get sensu-server | shyaml get-value settings.dashboard_password.value`
 echo
 echo Juju GUI:
 echo - http://`cat /tmp/juju.yml | shyaml get-value services.juju-gui.units.juju-gui/0.public-address`

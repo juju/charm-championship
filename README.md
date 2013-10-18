@@ -4,6 +4,8 @@ This Juju Deployment will build a full monitoring and logging stack for your env
 
 ## The following Applications will be Installed and configured
 
+![Alt text](juju-gui.png "Screenshot from JuJu Gui")
+
 * Juju
 ** bootstrap node
 ** juju GUI
@@ -29,13 +31,29 @@ Between the server startup time and getting all the dependencies hooked together
 
 ## To Deploy
 
+The following *should* work,  however I've encountered several bugs in the juju tools.  Some appear to have been fixed,  but still not getting a complete build from juju-deployer.
+
+
 ```
 sudo pip install juju-deployer
 juju bootstrap
-juju-deployer -c monitoringstack.yaml
+juju-deployer -c monitoringstack.yaml monitoringstack
+# Looks like juju-deployer doesn't expose services ?
+juju expose sensu-server
+juju expose graphite
+juju expose kibana
+juju expose rabbit
+juju expose juju-gui
 ```
 
-^ I had some (issues with the GUI)[https://bugs.launchpad.net/juju-core/+bug/1240708] export and subordinate charms ( bonus points for finding a bug right? ),  so I put together the following shell script to deploy the same stack via the CLI.     
+* [juju-gui export and subordinate charms bug](https://bugs.launchpad.net/juju-core/+bug/1240708).
+** Has been resolved.
+* [juju-deployer never completes deployment bug](https://bugs.launchpad.net/juju-deployer/+bug/1241721)
+** Appears to be intermittant ...  YMMV
+** I've also experienced where services don't actually start using this method.  
+
+The following shell script deploys the same stack via the juju CLI tools.   Worksaround the bugs above.
+
 
 ```
 sh monitoringstack.sh
