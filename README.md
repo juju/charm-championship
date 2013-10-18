@@ -2,6 +2,8 @@
 
 This Juju Deployment will build a full monitoring and logging stack for your environment.
 
+It has been tested in Amazon EC2,  but should work in any environment.
+
 ## The following Applications will be Installed and configured
 
 ![Alt text](juju-gui.png "Screenshot from JuJu Gui")
@@ -31,7 +33,18 @@ Between the server startup time and getting all the dependencies hooked together
 
 ## To Deploy
 
-The following *should* work,  however I've encountered several bugs in the juju tools.  Some appear to have been fixed,  but still not getting a complete build from juju-deployer.
+First clone this repo
+
+```
+git clone https://github.com/paulczar/charm-championship.git monitoringstack
+cd monitoringstack
+```
+
+Use one of the two following methods to kick off the deployment.
+
+### Juju Deployer
+
+The following *should* work,  however I've encountered several bugs in the juju tools.  Some appear to have been fixed,  but still getting consistently reliable results.    I recommend you use the other method.
 
 
 ```
@@ -53,9 +66,11 @@ juju expose juju-gui
 * -- Appears to be intermittant ...  YMMV
 * -- I've also experienced where services don't actually start using this method.  
 
+### Juju CLI tools
+
 
 The following shell script deploys the same stack via the juju CLI tools and is not affected by the bugs above. I'm deploying
-the juju-gui as part of it,  so at least the gui can give a graphical representation of the results.
+the juju-gui as part of it,  so the gui can give a graphical representation of the results as well as be used to further modify the deployment if pointing and clicking is your thing.
 
 
 ```
@@ -64,7 +79,7 @@ sh monitoringstack.sh
 
 ## To access
 
-`juju status` can be a little hard to read when there's a lot of services,  so I wrote a little shell script to find and display the hostname/urls needed to access the various dasbhoards.  It is a little primitive and may not parse correctly until all services are up.
+`juju status` can be a little hard to read when there's a lot of services,  so I wrote a shell script to find and display the hostname/urls needed to access the various dasbhoards.  It is a fairly primitive and may not parse correctly until all services are up.
 
 If you're using a decent terminal you should even be able to click on the resultant URLs.
 
@@ -99,9 +114,6 @@ http://`services => graphite => public-address`:80
 #### Graphlot graph plotting cpu.user across all systems
 
 http://`services => graphite => public-address`/graphlot/?from=-1hour&until=-0hour&target=stats.*.cpu.user
-
-## Logstash agents
-
 
 ## Caveats
 
