@@ -1,3 +1,7 @@
+![Juju](http://ubuntuone.com/5mLQLCHY50wB2OyqejDpRa)
+
+__Category: Monitoring - represents a full stack of monitoring solutions for existing services.__
+
 # Monitoring Stack
 
 This Juju Deployment will build a full monitoring and logging stack for your environment.
@@ -33,7 +37,7 @@ Between the server startup time and getting all the dependencies hooked together
 
 ## To Deploy
 
-First clone this repo
+### First clone this repo
 
 ```
 git clone https://github.com/paulczar/charm-championship.git monitoringstack
@@ -76,7 +80,7 @@ the juju-gui as part of it,  so the gui can give a graphical representation of t
 
 
 ```
-sh monitoringstack.sh
+./monitoringstack.sh
 ```
 
 ## To access
