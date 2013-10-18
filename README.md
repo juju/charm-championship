@@ -1,84 +1,147 @@
 ![Juju](http://ubuntuone.com/5mLQLCHY50wB2OyqejDpRa)
 
-Everyone needs infrastructure, leverage the power of Juju to do it in an interesting way and win a prize.
+__Category: Monitoring - represents a full stack of monitoring solutions for existing services.__
 
----
+# Monitoring Stack
 
-## What is it?
+This Juju Deployment will build a full monitoring and logging stack for your environment.
 
-- Charm up the individual services in your infrastructure, make something that is cool and repeatable. 
-- Put it together into a Juju bundle.
-- Submit your stack for the prize.
-- Win money, over $60,000 USD in prizes! 
+It has been tested in Amazon EC2,  but should work in any environment.
 
+## The following Applications will be Installed and configured
 
-## This contest is for software developers.
+![Screenshot from JuJu Gui](juju-gui.png "Screenshot from JuJu Gui")
 
-### Step 1 - [Read the rules](http://juju.ubuntu.com/charm-championship).
+* Juju
+* -- bootstrap node
+* -- juju GUI
+* Queuing
+* -- RabbitMQ
+* Logging
+* -- Elasticsearch
+* -- Kibana
+* -- Logstash Server
+* -- Logstash Agent(s) on all machines
+* Monitoring
+* -- Graphite
+* -- Sensu Server
+* -- Sensu Agent(s) on all machines
 
-### Step 2 - Grab [the charms you](http://jujucharms.com) need for your stack or write your own and submit them back to the community. 
+If you are building your whole environment in juju you can simply add the logstash agent and sensu agent
+subordinate charms to any system you want to monitor.   Logstash agent is set up to look for common log directories for sensu, nginx, and apache and should start collecting their logs.  
 
-### Step 3 - Design and implement your infrastructure in the [Juju GUI](http://jujucharms.com/charms/precise/juju-gui), then export it.
+If you have servers outside of the juju deployment you can install the logstash agent or sensu agent on those servers
+and set them to send their data to the public port of the RabbitMQ server.
 
-### Step 4 - [Register](https://pages.canonical.com/CharmChamshionship_sign-up.html) so we can keep you updated and contact you if you're a finalist. 
+Between the server startup time and getting all the dependencies hooked together,  don't be surprised if it takes 15mins or more before kibana and sensu/graphite start seeing good data.
 
-### Step 5 - Submit your deployment bundle by forking this project and submitting a pull request.
+## To Deploy
 
----
+### First clone this repo
 
-## Prizes
+```
+git clone https://github.com/paulczar/charm-championship.git monitoringstack
+cd monitoringstack
+```
 
-- $10,000 USD prize for each category:
-  - In addition, individual charm maintainers of a reviewed charm in the “reviewed” section of the Charm Store receive $200 if their charm is included in a winning template. This can be awarded multiple times, to a maximum total of $3,000 per category.</li>
+Use one of the two following methods to kick off the deployment.
 
-- Winners in six categories
-  - Continuous deployment - a bundle of charms that allows startups to be immediately productive, continually launch new features, and scale effortlessly.
-  - Media - a bundle of charms that brings value to media content providers, distributors, and associated mass medium technologies.
-  - Telco - a bundle of charms that brings value to telecommunications service providers and telecommunications infrastructure.
-  - High Availability - represents a full stack of HA-enabled services to accomplish a task.
-  - Data Science / Data Mining - represents a full stack of data mining and “big data” analysis.
-  - Monitoring - represents a full stack of monitoring solutions for existing services.
+### Juju Deployer
 
-- Joint marketing opportunities with Canonical 
-
-## Rules
-
-See [this page](https://juju.ubuntu.com/charm-championship) for a complete list of rules. Legal document included in the github branch you will clone to enter. 
-
-
----
-
-## Timeline
-
-- July 1 - October 22
-
-## FAQ
-
-### Q: Who should participate?
-
-Anyone who has an infrastucture stack in the cloud and is interested in managing complex services. 
-
-### Q: Where can I ask questions and discuss the prizes?
-
-A: There is a mailing list for it [here](https://lists.ubuntu.com/mailman/listinfo/juju).
+The following *should* work,  however I've encountered several bugs in the juju tools.  Some appear to have been fixed,  but still not getting consistently reliable results.    I recommend you use the other method.
 
 
-### Q: How do I actually submit my entry?
+```
+sudo pip install juju-deployer
+juju bootstrap
+juju-deployer -c monitoringstack.yaml monitoringstack
+# Looks like juju-deployer doesn't expose services ?
+juju expose sensu-server
+juju expose graphite
+juju expose kibana
+juju expose rabbit
+juju expose juju-gui
+```
 
-A: See [this page](https://juju.ubuntu.com/charm-championship) with the step by step. But basically, model your stack in the Juju GUI, export it, and submit the yaml file via github.
+#### Bugs that I found when trying to use this method
 
-Export your bundle from the Juju GUI by hitting “Shift-D”. This will download a YAML file, which is your _submission_ to the contest. To import/re-deploy your bundle use the Juju Deployer if you want to test it on other environments:
+* [juju-gui export and subordinate charms bug](https://bugs.launchpad.net/juju-core/+bug/1240708).
+* -- Has been resolved.
+* [juju-gui export doens't save exposed ports bug](https://bugs.launchpad.net/juju-gui/+bug/1241782).
+* [juju-deployer never completes deployment bug](https://bugs.launchpad.net/juju-deployer/+bug/1241721).
+* -- Appears to be intermittant ...  YMMV
+* -- I've also experienced where services don't actually start using this method.  
 
-    sudo pip install juju-deployer
-    juju bootstrap
-    juju-deployer -c your-gui-export.yaml
-
-We recommend testing your bundle before submission, judges can't judge non-working bundles! 
-
-
-### Q: Aren’t you just doing this to get a bunch of free work?
-
-A: NO! The charms in the Charm Store are Free Software. We want people to improve knowledge sharing between devops. Keep your secret sauce secret, we want to concentrate on improving the blocks people use to build their infrastructure. 
+### Juju CLI tools
 
 
-This contest is inspired by our friends at [Netflix](https://github.com/Netflix/Cloud-Prize).
+The following shell script deploys the same stack via the juju CLI tools and is not affected by the bugs above. I'm deploying
+the juju-gui as part of it,  so the gui can give a graphical representation of the results as well as be used to further modify the deployment if pointing and clicking is your thing.
+
+
+```
+./monitoringstack.sh
+```
+
+## To access
+
+`juju status` can be a little hard to read when there's a lot of services,  so I wrote a shell script to find and display the hostname/urls needed to access the various dasbhoards.  It is a fairly primitive and may not parse correctly until all services are up.
+
+If you're using a decent terminal you should even be able to click on the resultant URLs.
+
+```
+sudo pip install shyaml
+./show-services
+```
+
+Below is the easiest way I could think of to represent how to find the hostnames/URLs by eyeballing the `juju status` output.
+
+### Kibana   
+
+![Screenshot from Kibana](kibana.png "Screenshot from Kibana")
+
+#### Basic Dashboard
+http://`services => kibana => public-address`:80
+
+#### Web site statistics
+http://`services => kibana => public-address`/index.html#/dashboard/file/web.json
+
+### Sensu
+
+![Screenshot from Sensu](sensu.png "Screenshot from Sensu")
+
+http://`services => sensu-server => public-address`:8080
+
+* username: admin
+* password: secret
+
+### Graphite 
+
+![Screenshot from Graphite](graphite.png "Screenshot from Graphite")
+
+#### Base Graphite Web
+
+http://`services => graphite => public-address`:80
+
+#### Graphlot graph plotting cpu.user across all systems
+
+http://`services => graphite => public-address`/graphlot/?from=-1hour&until=-0hour&target=stats.*.cpu.user
+
+## Caveats
+
+### This deployment is not HA.   To make it fully HA you would need to do the following
+
+* Add more Elasticsearch units
+* -- easy if in amazon,  can use EC2 discovery for auto-clustering
+* -- if you have luxury of multicast it should just work
+* -- there's some experimental config options ( ZENMASTERS ) which should work for unicast discovery, but not well tested.
+* Add more RabbitMQ units ( I haven't tested the clustering,  but the charm looks like it supports it )
+* Add a redundant Logstash Server ( or just have a script to start a new one if existing fails )
+* Add a redundant Sensu Server ( or just have a script to start a new one if existing fails )
+* Add a redundant Kibana Server and put a LB in front ( or just have a script to start a new one if existing fails )
+* Add support to Graphite charm to be HA and then add more Graphite units
+
+### No alerting
+
+* I didn't want to alert by default, because I don't know how you like to alert.
+* Pretty simple to set up Sensu to alert via email or via PagerDuty API

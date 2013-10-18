@@ -1,0 +1,97 @@
+monitoringstack: 
+  services: 
+    "juju-gui": 
+      charm: "cs:precise/juju-gui-78"
+      num_units: 1
+      annotations: 
+        "gui-x": "1186.88901884108"
+        "gui-y": "193.35717133307946"
+    rabbit: 
+      charm: "cs:precise/rabbitmq-server-14"
+      num_units: 1
+      annotations: 
+        "gui-x": "1184.8890798762363"
+        "gui-y": "454.69046906257165"
+    kibana: 
+      charm: "cs:~paulcz/precise/kibana-7"
+      num_units: 1
+      annotations: 
+        "gui-x": "917.8890798762363"
+        "gui-y": "191.81748413138985"
+    elasticsearch: 
+      charm: "cs:~paulcz/precise/elasticsearch-4"
+      num_units: 1
+      annotations: 
+        "gui-x": "598.5557058527988"
+        "gui-y": "191.81748413138996"
+    graphite: 
+      charm: "cs:~paulcz/precise/graphite-1"
+      num_units: 1
+      options: 
+        rabbit_username: sensu
+        rabbit_vhost: sensu
+      annotations: 
+        "gui-x": "791.5557668879551"
+        "gui-y": "469.35721710944665"
+    "logstash-indexer": 
+      charm: "cs:~paulcz/precise/logstash-indexer-9"
+      num_units: 1
+      annotations: 
+        "gui-x": "590.5557058527988"
+        "gui-y": "741.5634539937533"
+    "sensu-server": 
+      charm: "cs:~paulcz/precise/sensu-server-2"
+      num_units: 1
+      annotations: 
+        "gui-x": "1184.5557058527988"
+        "gui-y": "733.5634539937533"
+    "logstash-agent": 
+      charm: "cs:~paulcz/precise/logstash-agent-5"
+      annotations: 
+        "gui-x": "1545.3374174855871"
+        "gui-y": "691.733026125827"
+    "sensu-agent": 
+      charm: "cs:~paulcz/precise/sensu-agent-1"
+      annotations: 
+        "gui-x": "1541.6614303809804"
+        "gui-y": "477.5126092585259"
+  relations: 
+    - - "elasticsearch:cluster"
+      - "logstash-indexer:cluster"
+    - - "logstash-agent:juju-info"
+      - "rabbit:juju-info"
+    - - "logstash-agent:juju-info"
+      - "juju-gui:juju-info"
+    - - "logstash-agent:juju-info"
+      - "sensu-server:juju-info"
+    - - "logstash-agent:juju-info"
+      - "graphite:juju-info"
+    - - "logstash-agent:juju-info"
+      - "kibana:juju-info"
+    - - "logstash-agent:juju-info"
+      - "elasticsearch:juju-info"
+    - - "sensu-agent:juju-info"
+      - "logstash-indexer:juju-info"
+    - - "sensu-agent:juju-info"
+      - "elasticsearch:juju-info"
+    - - "sensu-agent:juju-info"
+      - "juju-gui:juju-info"
+    - - "logstash-indexer:amqp"
+      - "rabbit:amqp"
+    - - "sensu-server:amqp"
+      - "rabbit:amqp"
+    - - "graphite:amqp"
+      - "rabbit:amqp"
+    - - "logstash-agent:amqp"
+      - "rabbit:amqp"
+    - - "sensu-agent:juju-info"
+      - "rabbit:juju-info"
+    - - "sensu-agent:amqp"
+      - "rabbit:amqp"
+    - - "elasticsearch:rest"
+      - "kibana:rest"
+    - - "sensu-agent:juju-info"
+      - "kibana:juju-info"
+    - - "sensu-agent:juju-info"
+      - "graphite:juju-info"
+  series: precise
