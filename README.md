@@ -7,19 +7,19 @@ This Juju Deployment will build a full monitoring and logging stack for your env
 ![Alt text](juju-gui.png "Screenshot from JuJu Gui")
 
 * Juju
-** bootstrap node
-** juju GUI
+* -- bootstrap node
+* -- juju GUI
 * Queuing
-** RabbitMQ
+* -- RabbitMQ
 * Logging
-** Elasticsearch
-** Kibana
-** Logstash Server
-** Logstash Agent(s) on all machines
+* -- Elasticsearch
+* -- Kibana
+* -- Logstash Server
+* -- Logstash Agent(s) on all machines
 * Monitoring
-** Graphite
-** Sensu Server
-** Sensu Agent(s) on all machines
+* -- Graphite
+* -- Sensu Server
+* -- Sensu Agent(s) on all machines
 
 If you are building your whole environment in juju you can simply add the logstash agent and sensu agent
 subordinate charms to any system you want to monitor.   Logstash agent is set up to look for common log directories for sensu, nginx, and apache and should start collecting their logs.  
@@ -47,12 +47,15 @@ juju expose juju-gui
 ```
 
 * [juju-gui export and subordinate charms bug](https://bugs.launchpad.net/juju-core/+bug/1240708).
-** Has been resolved.
-* [juju-deployer never completes deployment bug](https://bugs.launchpad.net/juju-deployer/+bug/1241721)
-** Appears to be intermittant ...  YMMV
-** I've also experienced where services don't actually start using this method.  
+* -- Has been resolved.
+* [juju-gui export doens't save exposed ports bug](https://bugs.launchpad.net/juju-gui/+bug/1241782).
+* [juju-deployer never completes deployment bug](https://bugs.launchpad.net/juju-deployer/+bug/1241721).
+* -- Appears to be intermittant ...  YMMV
+* -- I've also experienced where services don't actually start using this method.  
 
-The following shell script deploys the same stack via the juju CLI tools.   Worksaround the bugs above.
+
+The following shell script deploys the same stack via the juju CLI tools and is not affected by the bugs above. I'm deploying
+the juju-gui as part of it,  so at least the gui can give a graphical representation of the results.
 
 
 ```
@@ -105,9 +108,9 @@ http://`services => graphite => public-address`/graphlot/?from=-1hour&until=-0ho
 ### This deployment is not HA.   To make it fully HA you would need to do the following
 
 * Add more Elasticsearch units
-** easy if in amazon,  can use EC2 discovery for auto-clustering
-** if you have luxury of multicast it should just work
-** there's some experimental config options ( ZENMASTERS ) which should work for unicast discovery, but not well tested.
+* -- easy if in amazon,  can use EC2 discovery for auto-clustering
+* -- if you have luxury of multicast it should just work
+* -- there's some experimental config options ( ZENMASTERS ) which should work for unicast discovery, but not well tested.
 * Add more RabbitMQ units ( I haven't tested the clustering,  but the charm looks like it supports it )
 * Add a redundant Logstash Server ( or just have a script to start a new one if existing fails )
 * Add a redundant Sensu Server ( or just have a script to start a new one if existing fails )
