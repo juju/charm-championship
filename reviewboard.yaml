@@ -1,0 +1,32 @@
+envExport: 
+  services: 
+    "juju-gui": 
+      charm: "cs:precise/juju-gui-78"
+      num_units: 1
+      annotations: 
+        "gui-x": "889"
+        "gui-y": "678.7698359714502"
+    memcached: 
+      charm: "cs:precise/memcached-7"
+      num_units: 1
+      annotations: 
+        "gui-x": "1191"
+        "gui-y": "678.7698359714502"
+    reviewboard: 
+      charm: "local:precise/reviewboard-12"
+      num_units: 1
+      annotations: 
+        "gui-x": "1040"
+        "gui-y": "417.2301640285498"
+    mysql: 
+      charm: "cs:precise/mysql-27"
+      num_units: 1
+      annotations: 
+        "gui-x": "738"
+        "gui-y": "417.2301640285498"
+  relations: 
+    - - "reviewboard:db"
+      - "mysql:db"
+    - - "reviewboard:cache"
+      - "memcached:cache"
+  series: precise
