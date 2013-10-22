@@ -16,9 +16,13 @@
   - to deploy:
 
 juju bootstrap
+
 sleep 180
+
 juju-deployer -c bigdata.yaml bigdata
+
 juju status
+
 # juju expose <charm>
 
 
@@ -35,8 +39,11 @@ juju status
   - to deploy:
 
 juju bootstrap
+
 sleep 180
+
 juju-deployer -c ha_apache.yaml ha_apache
+
 juju status
 
 
