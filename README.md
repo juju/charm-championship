@@ -2,6 +2,8 @@
 
   - Entry: Data Science / Data Mining - represents a full stack of data mining and “big data” analysis.
 
+![Screenshot from JuJu Gui](bigdata.png "Screenshot from JuJu Gui")
+
   - this charm is called bigdata. It includes the following charms:
     - hadoop with hbase and pig enabled
     - hive
