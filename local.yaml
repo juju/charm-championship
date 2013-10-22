@@ -1,0 +1,34 @@
+## This is the Juju config file, which you can use to specify multiple environments in which to deploy.
+## By default Juju ships AWS (default), HP Cloud, OpenStack.
+## See https://juju.ubuntu.com/docs for more information
+
+## An environment configuration must always specify at least the following information:
+##
+## - name (to identify the environment)
+## - type (to specify the provider)
+## - admin-secret (an arbitrary "password" identifying an client with administrative-level access to system state)
+
+## Values in <brackets> below need to be filled in by the user.
+
+## The default environment is chosen when one is not specified using either:
+##   -e, --environment command line parameter
+##   JUJU_ENV environment variable
+## If both -e and JUJU_ENV are specified, the command line parameter has precedence.
+default: local
+
+environments:
+  ## https://juju.ubuntu.com/get-started/local/
+  local:
+    type: local
+    admin-secret: notsosecret 
+    # Override the directory that is used for the storage files and database.
+    # The default location is $JUJU_HOME/<ENV>.
+    # $JUJU_HOME defaults to ~/.juju
+    # root-dir: ~/.juju/local
+    # Override the storage port if you have multiple local providers, or if the
+    # default port is used by another program.
+    # storage-port: 8040
+    # Override the shared storage port if you have multiple local providers, or if the
+    # default port is used by another program.
+    # shared-storage-port: 8041
+
