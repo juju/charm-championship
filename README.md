@@ -10,7 +10,6 @@
     - hadoop with hbase and pig enabled
     - hive
     - mysql
-    - solr
     - nagios nrpe
 
   - to deploy:
@@ -19,11 +18,9 @@ juju bootstrap
 
 sleep 180
 
-juju-deployer -c bigdata.yaml bigdata
+juju-deployer -d -v -c bigdata.yaml envExport
 
 juju status
-
-# juju expose < charm >
 
 
   - 2. Entry: HA of the apache2 service.
@@ -42,7 +39,7 @@ juju bootstrap
 
 sleep 180
 
-juju-deployer -c ha_apache.yaml ha_apache
+juju-deployer -d -v -c ha_apache.yaml envExport
 
 juju status
 
