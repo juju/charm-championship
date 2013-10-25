@@ -43,4 +43,14 @@ juju-deployer -d -v -c ha_apache.yaml envExport
 
 juju status
 
+# ssh haproxy_public_address
+
+sudo vi /etc/haproxy/haproxy.cfg
+
+# in a listen section, add a server statement using apache public address from juju status above like this:
+
+listen http_proxy 172.31.41.72:80
+    balance roundrobin
+    server www0 54.200.214.90 weight 1 maxconn 2048 check inter 2000 cookie www0
+
 
