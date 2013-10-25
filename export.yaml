@@ -1,0 +1,60 @@
+envExport: 
+  services: 
+    phpmyadmin: 
+      charm: "cs:precise/phpmyadmin-3"
+      num_units: 1
+      annotations: 
+        "gui-x": "-172.25582885742188"
+        "gui-y": "325.12328728172145"
+    mysqlproxy: 
+      charm: "cs:precise/haproxy-19"
+      num_units: 1
+      annotations: 
+        "gui-x": "346.3960266113281"
+        "gui-y": "304.10650352241464"
+    mysql: 
+      charm: "cs:precise/mysql-27"
+      num_units: 1
+      annotations: 
+        "gui-x": "507.5621032714844"
+        "gui-y": "588.1480989813991"
+    memcached: 
+      charm: "cs:precise/memcached-7"
+      num_units: 1
+      annotations: 
+        "gui-x": "655.8075561523438"
+        "gui-y": "210.21584709617457"
+    "juju-gui": 
+      charm: "cs:precise/juju-gui-78"
+      num_units: 2
+      annotations: 
+        "gui-x": "-182.41437530517578"
+        "gui-y": "573.0570057496175"
+    apache2: 
+      charm: "cs:precise/apache2-12"
+      num_units: 3
+      annotations: 
+        "gui-x": "343.5081275996441"
+        "gui-y": "46.07374577987969"
+    haproxy: 
+      charm: "cs:precise/haproxy-19"
+      num_units: 1
+      annotations: 
+        "gui-x": "356.97735595703125"
+        "gui-y": "-172.0982894897461"
+    slavesmysql: 
+      charm: "cs:precise/mysql-28"
+      num_units: 2
+      annotations: 
+        "gui-x": "197"
+        "gui-y": "582"
+  relations: 
+    - - "mysql:db-admin"
+      - "phpmyadmin:db-admin"
+    - - "haproxy:reverseproxy"
+      - "apache2:website"
+    - - "mysql:master"
+      - "slavesmysql:slave"
+    - - "slavesmysql:db-admin"
+      - "phpmyadmin:db-admin"
+  series: precise
