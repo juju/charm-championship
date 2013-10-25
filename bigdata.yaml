@@ -1,0 +1,74 @@
+envExport: 
+  series: precise
+  services: 
+    nrpe: 
+      charm: "cs:precise/nrpe-1"
+      expose: true
+      num_units: 1
+#      constraints: "cpu=,mem=,arch="
+      annotations: 
+        "gui-x": 1054.6666259765625
+        "gui-y": 274.66668701171875
+    hadoop: 
+      charm: "cs:precise/hadoop-9"
+      expose: true
+      num_units: 1
+      options: 
+        dfs_block_size: 67108864
+        dfs_datanode_max_xcievers: 4096
+        dfs_namenode_handler_count: 10
+        hadoop_dir_base: /var/lib/hadoop
+        hbase: true
+        heap: 1024
+        io_file_buffer_size: 4096
+        io_sort_factor: 10
+        io_sort_mb: 100
+        mapred_child_java_opts: "-Xmx200m"
+        mapred_job_tracker_handler_count: 10
+        mapred_reduce_parallel_copies: 5
+        pig: true
+        source: stable
+        tasktracker_http_threads: 40
+        webhdfs: false
+#      constraints: "cpu=,mem=,arch="
+      annotations: 
+        "gui-x": 667
+        "gui-y": 330.25
+    hive: 
+      charm: "cs:precise/hive-3"
+      expose: true
+      num_units: 1
+      options: 
+        heap: 1024
+        source: stable
+#      constraints: "cpu=,mem=,arch="
+      annotations: 
+        "gui-x": 331
+        "gui-y": 328.25
+    mysql: 
+      charm: "cs:precise/mysql-27"
+      expose: true
+      num_units: 1
+      options: 
+        "binlog-format": MIXED
+        "block-size": 5
+        "dataset-size": "80%"
+        flavor: distro
+        "ha-bindiface": eth0
+        "ha-mcastport": 5411
+        "max-connections": -1
+        "preferred-storage-engine": InnoDB
+        "query-cache-size": -1
+        "query-cache-type": "OFF"
+        "rbd-name": mysql1
+        "tuning-level": safest
+        vip_cidr: 24
+        vip_iface: eth0
+#      constraints: "cpu=,mem=,arch="
+      annotations: 
+        "gui-x": 1004
+        "gui-y": -120.74996948242188
+  relations: 
+    - - "hive:jobtracker"
+      - "hadoop:jobtracker"
+

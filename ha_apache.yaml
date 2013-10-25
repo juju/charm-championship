@@ -1,0 +1,96 @@
+envExport: 
+  series: precise
+  services: 
+    apache2: 
+      charm: "cs:precise/apache2-12"
+      expose: true
+      num_units: 1
+      options: 
+        config_change_command: reload
+        disable_modules: status autoindex
+        enable_modules: ""
+        extra_packages: ""
+        lb_balancer_timeout: 60
+        logrotate_count: 365
+        logrotate_dateext: true
+        logrotate_rotate: daily
+        mpm_maxclients: 2048
+        mpm_maxrequestsperchild: "0"
+        mpm_maxsparethreads: 75
+        mpm_minsparethreads: 25
+        mpm_serverlimit: 128
+        mpm_startservers: 2
+        mpm_threadlimit: 64
+        mpm_threadsperchild: 64
+        mpm_type: worker
+        nagios_check_http_params: ""
+        nagios_context: juju
+        package_status: install
+        server_signature: "On"
+        server_tokens: OS
+        servername: ""
+        ssl_cert: ""
+        ssl_certlocation: ""
+        ssl_chain: ""
+        ssl_chainlocation: ""
+        ssl_key: ""
+        ssl_keylocation: ""
+        trace_enabled: "On"
+        use_rsyslog: false
+        vhost_http_template: ""
+        vhost_https_template: ""
+#      constraints: "cpu=,mem=,arch="
+      annotations: 
+        "gui-x": 633
+        "gui-y": 285
+    haproxy: 
+      charm: "cs:precise/haproxy-19"
+      expose: true
+      num_units: 1
+      options: 
+        default_log: global
+        default_mode: http
+        default_options: "httplog, dontlognull"
+        default_retries: 3
+        default_timeouts: "queue 20000, client 50000, connect 5000, server 50000"
+        enable_monitoring: false
+        global_debug: false
+        global_group: haproxy
+        global_log: "127.0.0.1 local0, 127.0.0.1 local1 notice"
+        global_maxconn: 4096
+        global_quiet: false
+        global_spread_checks: "0"
+        global_user: haproxy
+        monitoring_allowed_cidr: 127.0.0.1/32
+        monitoring_password: changeme
+        monitoring_port: 10000
+        monitoring_stats_refresh: 3
+        monitoring_username: haproxy
+        nagios_context: juju
+        package_status: install
+        services: "- service_name: haproxy_service\n  service_host: \"0.0.0.0\"\n  service_port: 80\n  service_options: [balance leastconn]\n  server_options: maxconn 100\n"
+        sysctl: ""
+#      constraints: "cpu=,mem=,arch="
+      annotations: 
+        "gui-x": 352.3333435058594
+        "gui-y": 275
+    nrpe: 
+      charm: "cs:precise/nrpe-1"
+      expose: true
+      num_units: 1
+#      constraints: "cpu=,mem=,arch="
+      annotations: 
+        "gui-x": 958
+        "gui-y": 282
+    "ganglia-node": 
+      charm: "cs:precise/ganglia-node-0"
+      expose: true
+      num_units: 1
+#      constraints: "cpu=,mem=,arch="
+      annotations: 
+        "gui-x": 965
+        "gui-y": 506.25
+  relations: 
+    - - "haproxy:reverseproxy"
+      - "apache2:website"
+
